@@ -12,6 +12,7 @@ import com.example.gazouille.R
 import com.example.gazouille.fragments.HomeFragment
 import com.example.gazouille.fragments.MyActivityFragment
 import com.example.gazouille.fragments.SearchFragment
+import com.example.gazouille.util.User
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
 import kotlinx.android.synthetic.main.activity_home.*
@@ -24,6 +25,7 @@ class HomeActivity : AppCompatActivity() {
     private val searchFragment = SearchFragment()
     private val myActivityFragment = MyActivityFragment()
     private var userId = firebaseAuth.currentUser?.uid
+    private var user: User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -52,7 +54,12 @@ class HomeActivity : AppCompatActivity() {
         logo.setOnClickListener { view ->
                 startActivity(ProfileActivity.newIntent(this))
         }
+
+        fab.setOnClickListener {
+            startActivity(TweetActivity.newIntent(this, userId, user?.username))
+        }
     }
+
 
 
 
@@ -63,8 +70,6 @@ class HomeActivity : AppCompatActivity() {
             startActivity(LoginActivity.newIntent(this))
             finish()
         }
-
-
     }
     inner class SectionPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {

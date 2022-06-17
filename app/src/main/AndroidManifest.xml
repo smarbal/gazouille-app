@@ -11,6 +11,13 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gazouille">
         <activity
+            android:name=".activities.TweetActivity"
+            android:exported="false"
+            android:screenOrientation="portrait"
+            android:theme="@style/Theme.Gazouille"
+            android:windowSoftInputMode="adjustResize"
+            />
+        <activity
             android:name=".activities.ProfileActivity"
             android:exported="false"
             android:screenOrientation="portrait"

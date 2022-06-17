@@ -12,15 +12,18 @@ import com.example.gazouille.R
 import com.example.gazouille.fragments.HomeFragment
 import com.example.gazouille.fragments.MyActivityFragment
 import com.example.gazouille.fragments.SearchFragment
+import com.example.gazouille.util.DATA_USERS
 import com.example.gazouille.util.User
 import com.google.android.material.tabs.TabLayout
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home.*
 
 class HomeActivity : AppCompatActivity() {
 
     private var sectionsPagerAdapter: SectionPagerAdapter? = null
     private val firebaseAuth = FirebaseAuth.getInstance()
+    private val firebaseDB = FirebaseFirestore.getInstance()
     private val homeFragment = HomeFragment()
     private val searchFragment = SearchFragment()
     private val myActivityFragment = MyActivityFragment()
@@ -58,6 +61,7 @@ class HomeActivity : AppCompatActivity() {
         fab.setOnClickListener {
             startActivity(TweetActivity.newIntent(this, userId, user?.username))
         }
+        homeProgressLayout.setOnTouchListener { v, event -> true }
     }
 
 
@@ -70,6 +74,22 @@ class HomeActivity : AppCompatActivity() {
             startActivity(LoginActivity.newIntent(this))
             finish()
         }
+        else {
+            populate()
+        }
+    }
+
+    fun populate() {
+        homeProgressLayout.visibility = View.VISIBLE
+        firebaseDB.collection(DATA_USERS).document(userId!!).get()
+            .addOnSuccessListener { documentSnapshot ->
+                homeProgressLayout.visibility = View.GONE
+                user = documentSnapshot.toObject(User::class.java)
+            }
+            .addOnFailureListener { e ->
+                e.printStackTrace()
+                finish()
+            }
     }
     inner class SectionPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {

@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "873058095794",
+    "project_id": "gazouille-16e5e",
+    "storage_bucket": "gazouille-16e5e.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:873058095794:android:5f17093e15a95c54212fab",
+        "android_client_info": {
+          "package_name": "com.example.gazouille"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "873058095794-umigo53f0mo1mq5nu7soi1csmv08lkvb.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyCwgtJnUVCgB1CgIdabgMKsxt4-Ed3GflA"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "873058095794-umigo53f0mo1mq5nu7soi1csmv08lkvb.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

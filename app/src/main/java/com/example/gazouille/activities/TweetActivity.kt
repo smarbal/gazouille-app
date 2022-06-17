@@ -2,13 +2,13 @@ package com.example.gazouille.activities
 
 import android.content.Context
 import android.content.Intent
+import android.net.Uri
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import com.example.gazouille.R
-import com.example.gazouille.util.DATA_TWEETS
-import com.example.gazouille.util.Tweet
+import com.example.gazouille.util.*
 import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.storage.FirebaseStorage
 import kotlinx.android.synthetic.main.activity_tweet.*
@@ -17,7 +17,7 @@ class TweetActivity : AppCompatActivity() {
 
     private val firebaseDB = FirebaseFirestore.getInstance()
     private val firebaseStorage = FirebaseStorage.getInstance().reference
-    private val imageUrl : String? = null
+    private var imageUrl : String? = null
     private var userId : String? = null
     private var userName : String? = null
 
@@ -32,8 +32,46 @@ class TweetActivity : AppCompatActivity() {
     }
 
     fun addImage(view: View) {
-        // add image to the firebase database
+        val intent = Intent(Intent.ACTION_PICK)
+        intent.type = "image/*"
+        startActivityForResult(intent, REQUEST_CODE_PHOTO) //retrieve image based on user choice for application
+    }
 
+    //request code is used to make correspond request and response
+    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
+        super.onActivityResult(requestCode, resultCode, data)
+        if (requestCode == REQUEST_CODE_PHOTO && resultCode == RESULT_OK) {
+            storeImage(data?.data)
+        }
+    }
+
+    fun storeImage(imageUri: Uri?) {  //store in database and show
+        imageUri?.let {
+            Toast.makeText(this, "Uploading...", Toast.LENGTH_SHORT).show()
+            tweetProgressLayout.visibility = View.VISIBLE
+
+            val filePath = firebaseStorage.child(DATA_TWEET_IMAGES).child(userId!!)
+            filePath.putFile(imageUri)
+                .addOnSuccessListener {
+                    filePath.downloadUrl
+                        .addOnSuccessListener {uri ->
+                            imageUrl = uri.toString()
+                            tweetImage.loadUrl(imageUrl, R.drawable.logo)
+                            tweetProgressLayout.visibility = View.GONE
+                        }
+                        .addOnFailureListener {
+                            onUploadFailure()
+                        }
+                }
+                .addOnFailureListener {
+                    onUploadFailure()
+                }
+        }
+    }
+
+    fun onUploadFailure() {
+        Toast.makeText(this, "Image upload failed. Please try again later.", Toast.LENGTH_SHORT).show()
+        tweetProgressLayout.visibility = View.GONE
     }
 
     fun postTweet(view: View){

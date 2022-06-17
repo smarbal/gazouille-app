@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:id="@+id/tweetLayout"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <TextView
+        android:id="@+id/tweetUsername"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Useranem"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/tweetText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Text"
+        android:textSize="18sp"
+        app:layout_constraintTop_toBottomOf="@+id/tweetUsername" />
+    <ImageView
+        android:id="@+id/tweetImage"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tweetText"
+        android:adjustViewBounds="true"
+        android:scaleType="centerInside" />
+    <TextView
+        android:id="@+id/tweetDate"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:text="Date"
+        app:layout_constraintTop_toBottomOf="@+id/tweetImage" />
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintTop_toBottomOf="@+id/tweetDate"
+        android:orientation="horizontal"
+        android:gravity="center">
+
+        <ImageView
+            android:id="@+id/tweetLike"
+            android:layout_width="30dp"
+            android:layout_height="30dp"
+            android:src="@drawable/like_inactive"
+            android:padding="@dimen/grid_1x"
+            android:scaleType="centerInside" >
+
+        </ImageView>
+
+        <TextView
+            android:id="@+id/tweetLikeCount"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:gravity="center_vertical"
+            android:paddingLeft="@dimen/grid_2x"
+            android:textSize="@dimen/standard_text_size"
+            android:text="0" />
+
+
+    </LinearLayout>
+
+
+</androidx.constraintlayout.widget.ConstraintLayout>

@@ -6,4 +6,6 @@
     <string name="text_signup">No account ? Go to Signup</string>
     <string name="hint_username">Username</string>
     <string name="text_login">Already have an account ? Go to Login</string>
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
 </resources>

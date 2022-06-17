@@ -11,22 +11,22 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.Gazouille">
         <activity
-            android:name=".SignupActivity"
+            android:name=".activities.ProfileActivity"
+            android:exported="false" />
+        <activity
+            android:name=".activities.SignupActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Gazouille"
-            android:windowSoftInputMode="adjustResize"
-            />
-
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".HomeActivity"
+            android:name=".activities.HomeActivity"
             android:exported="false"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Gazouille"
-            android:windowSoftInputMode="adjustResize"/>
-            />
+            android:windowSoftInputMode="adjustResize" />
         <activity
-            android:name=".LoginActivity"
+            android:name=".activities.LoginActivity"
             android:exported="true"
             android:screenOrientation="portrait"
             android:theme="@style/Theme.Gazouille"

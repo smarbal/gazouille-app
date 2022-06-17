@@ -23,7 +23,7 @@ class HomeActivity : AppCompatActivity() {
     private val homeFragment = HomeFragment()
     private val searchFragment = SearchFragment()
     private val myActivityFragment = MyActivityFragment()
-    private val userId = firebaseAuth.currentUser?.uid
+    private var userId = firebaseAuth.currentUser?.uid
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -48,20 +48,23 @@ class HomeActivity : AppCompatActivity() {
                 TODO("Not yet implemented")
             }
         })
+
+        logo.setOnClickListener { view ->
+                startActivity(ProfileActivity.newIntent(this))
+        }
     }
 
-    fun onlLogout(view: View) {
-        firebaseAuth.signOut()
-        startActivity(LoginActivity.newIntent(this))
-        finish()
-    }
+
 
     override fun onResume() {
         super.onResume()
+        userId = firebaseAuth.currentUser?.uid
         if(userId == null) {
             startActivity(LoginActivity.newIntent(this))
             finish()
         }
+
+
     }
     inner class SectionPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {

@@ -122,7 +122,7 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:id="@+id/loginProgressLayout"
+        android:id="@+id/homeProgressLayout"
         android:orientation="vertical"
         android:gravity="center"
         android:visibility="gone"

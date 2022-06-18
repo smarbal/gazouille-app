@@ -12,7 +12,8 @@
         android:layout_height="200dp"
         android:background="@color/colorAccent"
         android:orientation="vertical"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        tools:layout_editor_absoluteX="0dp">
 
         <TextView
             android:id="@+id/usernameProfile"
@@ -24,6 +25,16 @@
             android:textColor="@color/white"
             android:textSize="35dp"
             android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/followersProfile"
+            android:layout_width="match_parent"
+            android:layout_height="30dp"
+            android:layout_margin="10dp"
+            android:gravity="center_horizontal"
+            android:text="TextView"
+            android:textColor="@color/white" />
+
     </LinearLayout>
 
     <androidx.swiperefreshlayout.widget.SwipeRefreshLayout

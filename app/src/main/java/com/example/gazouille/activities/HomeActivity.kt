@@ -55,6 +55,7 @@ class HomeActivity : AppCompatActivity(), HomeCallback {
                         titleBar.text = "Home"
                         searchBar.visibility = View.GONE
                         currentFragment = homeFragment
+
                     }
                     1 -> {
                         titleBar.visibility = View.GONE
@@ -114,6 +115,8 @@ class HomeActivity : AppCompatActivity(), HomeCallback {
                 homeProgressLayout.visibility = View.GONE
                 user = documentSnapshot.toObject(User::class.java)
                 updateFragmentUser()
+                homeFragment.updateList()
+
             }
             .addOnFailureListener { e ->
                 e.printStackTrace()

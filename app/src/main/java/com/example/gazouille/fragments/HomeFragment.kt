@@ -25,6 +25,7 @@ class HomeFragment : GazouilleFragment() {
             savedInstanceState: Bundle?
         ): View? {
             return inflater.inflate(R.layout.fragment_home, container, false)
+
         }
 
         override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -39,7 +40,7 @@ class HomeFragment : GazouilleFragment() {
                 adapter = tweetsAdapter
                 addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             }
-            //updateList() //load data on launch
+
 
             swipeRefresh.setOnRefreshListener {
                 swipeRefresh.isRefreshing = false

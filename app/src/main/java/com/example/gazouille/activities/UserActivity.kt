@@ -1,5 +1,6 @@
 package com.example.gazouille.activities
 
+import android.annotation.SuppressLint
 import android.content.Context
 import android.content.Intent
 import android.os.Bundle
@@ -36,11 +37,19 @@ class UserActivity : AppCompatActivity() {
 
 
 
+    @SuppressLint("SetTextI18n")
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
 
-        username = intent.getStringExtra(DATA_USER_USERNAME) // will return "FirstKeyValue"
+        username = intent.getStringExtra(DATA_USER_USERNAME) // will return "username"
+
+        firebaseDB.collection(DATA_USERS).whereEqualTo(DATA_USER_USERNAME, username)
+            .get().addOnSuccessListener {
+                currentUser = it.documents[0].toObject(User::class.java)
+                followersProfile.text = "Followers :" + currentUser?.followUsers?.count()
+        }
+            .addOnFailureListener { Toast.makeText(this, it.message, Toast.LENGTH_LONG).show() }
 
         if (username == null) {
             finish()
@@ -62,6 +71,9 @@ class UserActivity : AppCompatActivity() {
             profileRefresh.isRefreshing = false
             populateInfo()
         }
+
+
+
 
         populateInfo()
 

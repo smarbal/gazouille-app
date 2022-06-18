@@ -7,6 +7,7 @@ import android.os.Bundle
 import android.view.View
 import android.widget.TextView
 import android.widget.Toast
+import androidx.appcompat.app.AppCompatDelegate
 import com.example.gazouille.R
 import com.example.gazouille.util.DATA_USERS
 import com.example.gazouille.util.DATA_USER_EMAIL

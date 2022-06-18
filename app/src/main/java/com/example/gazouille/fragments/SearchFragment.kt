@@ -9,6 +9,8 @@ import com.example.gazouille.R
 
 class SearchFragment : GazouilleFragment() {
 
+    private var currentUser = ""
+    private var tweetsAdapter = ""
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -16,6 +18,16 @@ class SearchFragment : GazouilleFragment() {
     ): View? {
         // Inflate the layout for this fragment
         return inflater.inflate(R.layout.fragment_search, container, false)
+    }
+
+    fun searchUser(term:String){
+        currentUser = term
+        updateList()
+
+    }
+
+    fun updateList() {
+
     }
 
 }

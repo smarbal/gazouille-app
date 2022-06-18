@@ -19,6 +19,7 @@ import kotlinx.android.synthetic.main.fragment_home.*
 class HomeFragment : GazouilleFragment() {
     protected var tweetsAdapter: TweetListAdapter? = null
     protected var listener: TwitterListenerImpl? = null
+
         override fun onCreateView(
             inflater: LayoutInflater, container: ViewGroup?,
             savedInstanceState: Bundle?

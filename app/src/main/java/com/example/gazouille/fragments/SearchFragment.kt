@@ -25,6 +25,8 @@ class SearchFragment : GazouilleFragment() {
     protected var usersAdapter : UserListAdapter? = null
     protected var listener : UserListenerImpl? = null
     private var searchedUser : String? = null
+
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?

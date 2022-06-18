@@ -37,6 +37,11 @@ class UserListAdapter (val searchedUsers : ArrayList<User>) : RecyclerView.Adapt
     fun setListener(listener: UserListener) {
         this.listener = listener
     }
+    fun updateUsers(newUsers: List<User>) {
+        this.searchedUsers.clear()
+        this.searchedUsers.addAll(newUsers)
+        notifyDataSetChanged()  //notify the adapter that the data has changed
+    }
 
     //create view holder, inflate the layout, and return the holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = UserViewHolder (

@@ -3,6 +3,7 @@ package com.example.gazouille.adapters
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import android.widget.Button
 import android.widget.ImageView
 import android.widget.TextView
 import androidx.core.content.ContextCompat
@@ -22,13 +23,17 @@ class UserListAdapter (val searchedUsers : ArrayList<User>) : RecyclerView.Adapt
     class UserViewHolder( view: View) : RecyclerView.ViewHolder(view) {
         private val layout = view.findViewById<ViewGroup>(R.id.userLayout)
         private val username = view.findViewById<TextView>(R.id.userUsername)
-
+        private val button = view.findViewById<Button>(R.id.profileButton)
 
         fun bind(user : User, listener: UserListener?) { //attach information to the layout
             username.text = user.username
 
             layout.setOnClickListener {
                 listener?.onLayoutClick(user.username)
+            }
+
+            button.setOnClickListener {
+                listener?.onButtonClick(user.username)
             }
         }
 

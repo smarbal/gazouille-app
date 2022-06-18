@@ -12,12 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.gazouille.R
 import com.example.gazouille.adapters.TweetListAdapter
 import com.example.gazouille.adapters.UserListAdapter
+import com.example.gazouille.listeners.HomeCallback
 import com.example.gazouille.listeners.TwitterListenerImpl
 import com.example.gazouille.listeners.UserListenerImpl
-import com.example.gazouille.util.DATA_TWEETS
-import com.example.gazouille.util.DATA_USERS
-import com.example.gazouille.util.Tweet
-import com.example.gazouille.util.User
+import com.example.gazouille.util.*
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_profile.*
@@ -31,23 +29,29 @@ class UserActivity : AppCompatActivity() {
     private val firebaseDB = FirebaseFirestore.getInstance()
     protected var tweetsAdapter: TweetListAdapter? = null
     protected var listener: TwitterListenerImpl? = null
-
+    private var username: String? = null
+    protected var callback: HomeCallback? = null
+    protected var currentUser: User? = null
     // getIntent() is a method from the started activity
-    var myIntent = intent // gets the previously created intent
 
-    var username = myIntent.getStringExtra("username") // will return "FirstKeyValue"
 
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_user)
+
+        username = intent.getStringExtra(DATA_USER_USERNAME) // will return "FirstKeyValue"
+
         if (username == null) {
             finish()
         }
 
         tweetsAdapter = TweetListAdapter(username!!, arrayListOf())
+        listener = TwitterListenerImpl(tweetsProfile, currentUser, callback)
+
+
         tweetsAdapter?.setListener(listener!!)
-        tweetList?.apply {
+        tweetsProfile?.apply {
             layoutManager = LinearLayoutManager(context)
             adapter = tweetsAdapter
             addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))

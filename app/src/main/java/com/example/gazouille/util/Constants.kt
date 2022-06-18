@@ -8,8 +8,7 @@ val DATA_USER_FOLLOW = "followUsers"
 
 val DATA_TWEETS = "Tweets"
 val DATA_TWEET_USER_IDS = "userIds"
-val DATA_TWEET_LIKES = "likes"
-
+val DATA_TWEETS_LIKES = "likes"
 
 val REQUEST_CODE_PHOTO = 193
 val DATA_TWEET_IMAGES = "TweetImages"

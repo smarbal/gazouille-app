@@ -6,7 +6,7 @@ data class User (
     val email: String? = "",
     val username: String? = "",
     val imageUrl: String? = "",
-    val followUsers: ArrayList<User>? = arrayListOf()
+    val followUsers: ArrayList<String>? = arrayListOf()
 )
 
 data class Tweet (

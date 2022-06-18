@@ -10,9 +10,11 @@ import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager
 import androidx.fragment.app.FragmentPagerAdapter
 import com.example.gazouille.R
+import com.example.gazouille.fragments.GazouilleFragment
 import com.example.gazouille.fragments.HomeFragment
 import com.example.gazouille.fragments.MyActivityFragment
 import com.example.gazouille.fragments.SearchFragment
+import com.example.gazouille.listeners.HomeCallback
 import com.example.gazouille.util.DATA_USERS
 import com.example.gazouille.util.User
 import com.google.android.material.tabs.TabLayout
@@ -20,7 +22,7 @@ import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.firestore.FirebaseFirestore
 import kotlinx.android.synthetic.main.activity_home.*
 
-class HomeActivity : AppCompatActivity() {
+class HomeActivity : AppCompatActivity(), HomeCallback {
 
     private var sectionsPagerAdapter: SectionPagerAdapter? = null
     private val firebaseAuth = FirebaseAuth.getInstance()
@@ -30,6 +32,7 @@ class HomeActivity : AppCompatActivity() {
     private val myActivityFragment = MyActivityFragment()
     private var userId = firebaseAuth.currentUser?.uid
     private var user: User? = null
+    private var currentFragment: GazouilleFragment = homeFragment
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -43,15 +46,32 @@ class HomeActivity : AppCompatActivity() {
         //attach tabs to container so that you can swipe in the container and it will change the tab
         tabs.addOnTabSelectedListener(object : TabLayout.OnTabSelectedListener {   //Perform operation when new page selected
             override fun onTabReselected(tab: TabLayout.Tab?) {
-
             }
 
             override fun onTabSelected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
+                when(tab?.position) {
+                    0 -> {
+                        titleBar.visibility = View.VISIBLE
+                        titleBar.text = "Home"
+                        searchBar.visibility = View.GONE
+                        currentFragment = homeFragment
+                    }
+                    1 -> {
+                        titleBar.visibility = View.GONE
+                        searchBar.visibility = View.VISIBLE
+                        currentFragment = searchFragment
+                    }
+                    2 -> {
+
+                        titleBar.visibility = View.VISIBLE
+                        titleBar.text = "My Activity"
+                        searchBar.visibility = View.GONE
+                        currentFragment = myActivityFragment
+                    }
+                }
             }
 
             override fun onTabUnselected(tab: TabLayout.Tab?) {
-                TODO("Not yet implemented")
             }
         })
 
@@ -93,11 +113,23 @@ class HomeActivity : AppCompatActivity() {
             .addOnSuccessListener { documentSnapshot ->
                 homeProgressLayout.visibility = View.GONE
                 user = documentSnapshot.toObject(User::class.java)
+                updateFragmentUser()
             }
             .addOnFailureListener { e ->
                 e.printStackTrace()
                 finish()
             }
+    }
+    override fun onUserUpdated(){
+        populate()
+    }
+
+    override fun onRefresh() { }
+
+    fun updateFragmentUser() {
+        homeFragment.setUser(user)
+//        searchFragment.setUser(user)
+//        myActivityFragment.setUser(user)
     }
     inner class SectionPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {
         override fun getItem(position: Int): Fragment {

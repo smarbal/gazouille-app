@@ -28,7 +28,7 @@ class UserListAdapter (val searchedUsers : ArrayList<User>) : RecyclerView.Adapt
             username.text = user.username
 
             layout.setOnClickListener {
-                listener?.onLayoutClick(user)
+                listener?.onLayoutClick(user.username)
             }
         }
 
@@ -38,14 +38,14 @@ class UserListAdapter (val searchedUsers : ArrayList<User>) : RecyclerView.Adapt
         this.listener = listener
     }
     fun updateUsers(newUsers: List<User>) {
-        this.searchedUsers.clear()
+        //this.searchedUsers.clear()
         this.searchedUsers.addAll(newUsers)
         notifyDataSetChanged()  //notify the adapter that the data has changed
     }
 
     //create view holder, inflate the layout, and return the holder
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int) = UserViewHolder (
-        LayoutInflater.from(parent.context).inflate(R.layout.item_tweet, parent, false)
+        LayoutInflater.from(parent.context).inflate(R.layout.item_user, parent, false)
     )
 
     override fun onBindViewHolder(holder: UserViewHolder, position: Int) {

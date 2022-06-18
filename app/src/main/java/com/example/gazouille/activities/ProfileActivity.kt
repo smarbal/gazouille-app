@@ -43,8 +43,12 @@ class ProfileActivity : AppCompatActivity() {
                     usernameET.setText(user.username, TextView.BufferType.EDITABLE)
                     emailET.setText(user.email, TextView.BufferType.EDITABLE)
                 }
+                profileProgressLayout.visibility = View.GONE
             }
-            .addOnFailureListener {  finish() }
+            .addOnFailureListener { exception ->
+                Toast.makeText(this, "Error: ${exception.localizedMessage}", Toast.LENGTH_LONG).show()
+                profileProgressLayout.visibility = View.GONE
+            }
     }
 
     companion object {

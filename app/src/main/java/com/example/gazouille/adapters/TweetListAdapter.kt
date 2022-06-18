@@ -63,8 +63,8 @@ class TweetListAdapter(val userId : String, val tweets: ArrayList<Tweet>) : Recy
     }
 
     fun updateTweets(newTweets: List<Tweet>) {
-        this.tweets.clear()
-        this.tweets.addAll(tweets)
+        //tweets.clear()
+        tweets.addAll(newTweets)
         notifyDataSetChanged()  //notify the adapter that the data has changed
     }
     //create view holder, inflate the layout, and return the holder

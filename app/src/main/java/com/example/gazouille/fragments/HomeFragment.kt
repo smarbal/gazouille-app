@@ -38,6 +38,7 @@ class HomeFragment : GazouilleFragment() {
                 adapter = tweetsAdapter
                 addItemDecoration(DividerItemDecoration(context, DividerItemDecoration.VERTICAL))
             }
+            //updateList() //load data on launch
 
             swipeRefresh.setOnRefreshListener {
                 swipeRefresh.isRefreshing = false

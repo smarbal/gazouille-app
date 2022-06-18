@@ -38,7 +38,7 @@ class UserListAdapter (val searchedUsers : ArrayList<User>) : RecyclerView.Adapt
         this.listener = listener
     }
     fun updateUsers(newUsers: List<User>) {
-        //this.searchedUsers.clear()
+        this.searchedUsers.clear()
         this.searchedUsers.addAll(newUsers)
         notifyDataSetChanged()  //notify the adapter that the data has changed
     }

@@ -36,7 +36,7 @@ class SearchFragment : GazouilleFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        listener = UserListenerImpl(userList)
+        listener = UserListenerImpl(userList, currentUser, callback)
         usersAdapter = UserListAdapter(arrayListOf())
         usersAdapter?.setListener(listener!!)
 
@@ -72,6 +72,11 @@ class SearchFragment : GazouilleFragment() {
                     println("Error getting documents: ${exception.message}")
                 }
         }
+    }
+
+    fun setUser(user: User?) {
+        currentUser = user
+        listener?.user = user
     }
 
 }

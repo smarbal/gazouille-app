@@ -128,7 +128,7 @@ class HomeActivity : AppCompatActivity(), HomeCallback {
 
     fun updateFragmentUser() {
         homeFragment.setUser(user)
-//        searchFragment.setUser(user)
+         searchFragment.setUser(user)
 //        myActivityFragment.setUser(user)
     }
     inner class SectionPagerAdapter(fm: FragmentManager): FragmentPagerAdapter(fm) {

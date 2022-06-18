@@ -4,7 +4,8 @@
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="wrap_content"
+    android:layout_margin="10dp">
 
     <TextView
         android:id="@+id/tweetUsername"
@@ -12,7 +13,8 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Useranem"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        android:textSize="25sp"/>
 
     <TextView
         android:id="@+id/tweetText"
@@ -20,7 +22,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Text"
-        android:textSize="18sp"
+        android:textSize="30sp"
         app:layout_constraintTop_toBottomOf="@+id/tweetUsername" />
     <ImageView
         android:id="@+id/tweetImage"
@@ -35,7 +37,9 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Date"
-        app:layout_constraintTop_toBottomOf="@+id/tweetImage" />
+        app:layout_constraintTop_toBottomOf="@+id/tweetImage"
+        android:textSize="25sp"
+        />
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"

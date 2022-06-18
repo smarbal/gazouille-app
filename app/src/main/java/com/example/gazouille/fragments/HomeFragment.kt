@@ -57,7 +57,7 @@ class HomeFragment : GazouilleFragment() {
                             val tweet = document.toObject(Tweet::class.java)
                             tweet?.let {
                                 if (currentUser?.followUsers?.contains(
-                                        it.userIds?.get(0)?.toString()
+                                        it.username
                                     )!! && //timestamp is less than 5 minutes ago
                                     it.timestamp > System.currentTimeMillis() - 300000
                                 ) {

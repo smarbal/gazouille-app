@@ -48,41 +48,39 @@ class HomeFragment : GazouilleFragment() {
 
     fun updateList() {
             tweetList?.visibility = View.GONE
-            currentUser?.let {
+            currentUser!!.let {
                 val tweets = arrayListOf<Tweet>()
 
-                    firebaseDB.collection(DATA_TWEETS).get()
-                        .addOnSuccessListener { list ->
-                            for(document in list.documents) {
-                                val tweet = document.toObject(Tweet::class.java)
-                                tweet?.let { tweets.add(it) }
+                firebaseDB.collection(DATA_TWEETS).get()
+                    .addOnSuccessListener { list ->
+                        for (document in list.documents) {
+                            val tweet = document.toObject(Tweet::class.java)
+                            tweet?.let {
+                                if (currentUser?.followUsers?.contains(
+                                        it.userIds?.get(0)?.toString()
+                                    )!! && //timestamp is less than 5 minutes ago
+                                    it.timestamp > System.currentTimeMillis() - 300000
+                                ) {
+                                    it.emphasis = true
+                                    //set   the emphasis to true if the user is following the user who posted the tweet (the first user in the list)
+                                }
+                                tweets.add(it)
                             }
                             updateAdapter(tweets)
                             tweetList?.visibility = View.VISIBLE
                         }
-                        .addOnFailureListener { e ->
-                            e.printStackTrace()
-                            tweetList?.visibility = View.VISIBLE
-                        }
-
-
-                for (followedUser in it.followUsers!!) {
-                    firebaseDB.collection(DATA_TWEETS).whereArrayContains(DATA_TWEET_USER_IDS, followedUser).get()
-                        .addOnSuccessListener { list ->
-                            for(document in list.documents) {
-                                val tweet = document.toObject(Tweet::class.java)
-                                tweet?.let { tweets.add(it) }
-                            }
-                            updateAdapter(tweets)
-                            tweetList?.visibility = View.VISIBLE
-                        }
-                        .addOnFailureListener { e ->
-                            e.printStackTrace()
-                            tweetList?.visibility = View.VISIBLE
-                        }
-                }
+                    }
+                    .addOnFailureListener { e ->
+                        e.printStackTrace()
+                        tweetList?.visibility = View.VISIBLE
+                    }
             }
-        }
+
+
+
+
+            }
+
 
         private fun updateAdapter(tweets: List<Tweet>) {
             val sortedTweets = tweets.sortedWith(compareByDescending { it.timestamp })
@@ -93,7 +91,7 @@ class HomeFragment : GazouilleFragment() {
 
     override fun onResume() {
         super.onResume()
-        updateList()
+        //updateList()
     }
     fun setUser(user: User?) {
         currentUser = user

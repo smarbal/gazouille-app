@@ -124,7 +124,9 @@ class HomeActivity : AppCompatActivity(), HomeCallback {
         populate()
     }
 
-    override fun onRefresh() { }
+    override fun onRefresh() {
+        homeFragment.updateList()
+    }
 
     fun updateFragmentUser() {
         homeFragment.setUser(user)

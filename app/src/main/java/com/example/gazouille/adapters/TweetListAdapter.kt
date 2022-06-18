@@ -27,6 +27,7 @@ class TweetListAdapter(val userId : String, val tweets: ArrayList<Tweet>) : Recy
         private val date = view.findViewById<TextView>(R.id.tweetDate)
         private val like = view.findViewById<ImageView>(R.id.tweetLike)
         private val likeCount = view.findViewById<TextView>(R.id.tweetLikeCount)
+        private val emphasis = view.findViewById<TextView>(R.id.textEmphasis)
 
         fun bind(userId: String, tweet: Tweet, listener: TweetListener?) { //attach information to the layout
             username.text = tweet.username
@@ -41,6 +42,12 @@ class TweetListAdapter(val userId : String, val tweets: ArrayList<Tweet>) : Recy
             date.text = getDate(tweet.timestamp)
             likeCount.text = tweet.likes?.size.toString()
 
+            if(tweet.emphasis){
+                emphasis.visibility = View.VISIBLE
+            }
+            else{
+                emphasis.visibility = View.GONE
+            }
             layout.setOnClickListener {
                 listener?.onLayoutClick(tweet)
             }
@@ -63,7 +70,7 @@ class TweetListAdapter(val userId : String, val tweets: ArrayList<Tweet>) : Recy
     }
 
     fun updateTweets(newTweets: List<Tweet>) {
-        //tweets.clear()
+        tweets.clear()
         tweets.addAll(newTweets)
         notifyDataSetChanged()  //notify the adapter that the data has changed
     }

@@ -16,6 +16,10 @@ data class Tweet (
     val text : String ? = "",
     val imageUrl: String? = "",
     val timestamp: Long = 0,
-    val likes: ArrayList<String>? = arrayListOf()
+    val likes: ArrayList<String>? = arrayListOf(),
+    var emphasis: Boolean = false
+    ) {
+    operator fun set(c: Char, value: Boolean) {
 
-    )
+    }
+}
